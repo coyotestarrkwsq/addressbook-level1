@@ -1151,9 +1151,24 @@ public class AddressBook {
      * @return  string without the sign
      */
     private static String removePrefixSign(String s, String sign) {
-        return s.replace(sign, "");
+        return removePrefix(s,sign);
     }
 
+    
+    /**
+    * Removes prefix from the given fullString if prefix occurs at the start of the string.
+    * 
+    * @param fullstring
+    * @param prefix
+    * @return string without the prefix
+    */
+    
+    private static String removePrefix(String fullString, String prefix) {
+        return fullString.replaceFirst("^"+prefix, "");
+        
+    }
+    
+    
     /**
      * Splits a source string into the list of substrings that were separated by whitespace.
      *
