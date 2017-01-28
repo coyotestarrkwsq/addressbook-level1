@@ -486,11 +486,37 @@ public class AddressBook {
         final ArrayList<String[]> matchedPersons = new ArrayList<>();
         for (String[] person : getAllPersonsInAddressBook()) {
             final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
+            
+            convertToUppCase(keywords);
+            convertToUppCase(wordsInName);
+            
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
         }
         return matchedPersons;
+    }
+    
+    
+    /**
+     * Convert names to upper case for comparison later in getPersonsWithNameContainingAnyKeyword
+     * method so that find command will be case insensitive
+     * 
+     * @param names to be changed to uppercase
+     * 
+     */
+    
+    private static void convertToUppCase(Collection<String> names) {
+        ArrayList<String> namesInCaps = new ArrayList<>();
+        for (String name : names) {
+            String capName = name.toUpperCase();
+            namesInCaps.add(capName);
+        }
+        names.clear();
+        for (String name : namesInCaps) {
+            names.add(name);
+        }
+
     }
 
     /**
